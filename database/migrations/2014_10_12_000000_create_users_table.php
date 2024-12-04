@@ -16,9 +16,7 @@ return new class extends Migration {
             $table->string('name');
             $table->bigInteger('number');
             $table->string('email')->unique();
-            $table->string('fix')->default('Rien');
-            $table->integer('status')->default(1);
-            $table->string('avatar')->nullable();
+
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

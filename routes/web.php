@@ -1,13 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\PermissionController;
-use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\changePasswordController;
-use App\Http\Controllers\FileController;
-use App\Http\Controllers\ReportController;
-use App\Http\Controllers\UserController;
-use App\Models\Enrigistrement;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -17,30 +9,26 @@ use Livewire\Volt\Volt;
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+| routes are loaded by the RouteServiceProvider within a group that
+| contains the "web" middleware group. Now create something great!
 |
 */
 
-// Welcome
-Volt::route('/', 'welcome');
+// Public Routes
+Volt::route('/', 'welcome'); // Welcome page
+Volt::route('/login', 'login')->name('login'); // Login page
+Volt::route('/register', 'register')->name('register'); // Registration page
 
-// Login
-Volt::route('/login', 'login')->name('login');
+// Authenticated Routes
+    // Home page for authenticated users
+    Volt::route('/homepages/home', 'homepages.home')->name('homepages.home');
+    Volt::route('/homepages/resources', 'homepages.resources')->name('homepages.resources');
 
-//Logout
+    // Logout Route
+    Route::get('/logout', function () {
+        auth()->logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
 
-
-Route::middleware('auth')->group(function () {
-//    // home
-    Volt::route('/home', 'dashboard.index');
-//
-
-Route::get('/logout', function () {
-    auth()->logout();
-    request()->session()->invalidate();
-    request()->session()->regenerateToken();
-
-    return redirect('/');
-});
-});
+        return redirect('/'); // Redirect to welcome or login page after logout
+    })->name('logout');

@@ -21,9 +21,9 @@ class extends Component {
         <div class="flex items-center space-x-4">
             <!-- Brand Logo -->
             <span class="flex items-center text-xl font-bold text-gray-900">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-2 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c1.657 0 3-1.343 3-3S13.657 2 12 2 9 3.343 9 5s1.343 3 3 3z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21H5a2 2 0 01-2-2v-5a2 2 0 012-2h14a2 2 0 012 2v5a2 2 0 01-2 2z" />
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="none">
+                    <path d="M20.1475 5.43668L19.4895 4.39419C19.1252 3.81704 18.943 3.52846 18.7044 3.50178C18.4657 3.4751 18.1993 3.74896 17.6664 4.29667C15.9443 6.06689 14.2221 5.80537 12.5 8.98839C10.7779 5.80537 9.05571 6.06689 7.33356 4.29667C6.80071 3.74896 6.53429 3.4751 6.29565 3.50178C6.057 3.52846 5.87485 3.81704 5.51054 4.39419L4.85251 5.43668C4.59827 5.83945 4.47115 6.04084 4.50553 6.2528C4.53991 6.46476 4.72324 6.60998 5.08991 6.90042L11.2724 11.7977C11.8634 12.2659 12.159 12.5 12.5 12.5C12.841 12.5 13.1366 12.2659 13.7276 11.7977L19.9101 6.90042C20.2768 6.60998 20.4601 6.46476 20.4945 6.2528C20.5288 6.04084 20.4017 5.83945 20.1475 5.43668Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M22.5 8.5L6.5 20.5V15.8043M2.5 8.5L18.5 20.5V15.8043" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
                 Smart-Ilm-Dalib
             </span>
@@ -52,15 +52,27 @@ class extends Component {
                 </svg>
                 Courses
             </a>
-
-            <!-- Profile Link -->
-            <a href="#profile" class="flex items-center text-gray-700 hover:text-green-500">
+            @if (Auth::check())
+            <!-- Home Link for Authenticated Users -->
+            <a href="/home" class="flex items-center text-gray-700 hover:text-green-500">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path d="M5.08069 15.2964C3.86241 16.0335 0.668175 17.5386 2.61368 19.422C3.56404 20.342 4.62251 21 5.95325 21H13.5468C14.8775 21 15.936 20.342 16.8863 19.422C18.8318 17.5386 15.6376 16.0335 14.4193 15.2964C11.5625 13.5679 7.93752 13.5679 5.08069 15.2964Z" />
                     <path d="M13.5 7C13.5 9.20914 11.7091 11 9.5 11C7.29086 11 5.5 9.20914 5.5 7C5.5 4.79086 7.29086 3 9.5 3C11.7091 3 13.5 4.79086 13.5 7Z" />
                 </svg>
-                Profile
+                Home
             </a>
+        @else
+            <!-- Login Link for Unauthenticated Users -->
+            <a href="/login" class="flex items-center text-gray-700 hover:text-green-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path d="M5.08069 15.2964C3.86241 16.0335 0.668175 17.5386 2.61368 19.422C3.56404 20.342 4.62251 21 5.95325 21H13.5468C14.8775 21 15.936 20.342 16.8863 19.422C18.8318 17.5386 15.6376 16.0335 14.4193 15.2964C11.5625 13.5679 7.93752 13.5679 5.08069 15.2964Z" />
+                    <path d="M13.5 7C13.5 9.20914 11.7091 11 9.5 11C7.29086 11 5.5 9.20914 5.5 7C5.5 4.79086 7.29086 3 9.5 3C11.7091 3 13.5 4.79086 13.5 7Z" />
+                </svg>
+                Login
+            </a>
+        @endif
+
+
         </div>
     </nav>
 
@@ -83,10 +95,10 @@ class extends Component {
             Join our interactive online platform for personalized Quran, Tajweed, and Tarteel lessons from certified instructors.
         </p>
         <div class="flex justify-center mt-8 space-x-4">
-            <a href="#courses" class="px-6 py-3 text-lg text-white bg-black rounded-md hover:bg-gray-800">
+            <a href="/home" class="px-6 py-3 text-lg text-white bg-black rounded-md hover:bg-gray-800">
                 Browse Courses
             </a>
-            <a href="#get-started" class="px-6 py-3 text-lg text-black bg-white border border-black rounded-md hover:bg-gray-100">
+            <a href="/login" class="px-6 py-3 text-lg text-black bg-white border border-black rounded-md hover:bg-gray-100">
                 Get Started
             </a>
         </div>
@@ -97,7 +109,7 @@ class extends Component {
     <!-- Why Choose Section -->
     <!-- Why Choose Section -->
     <section class="py-20 bg-gray-50">
-        <div class="max-w-6xl mx-auto text-center">
+        <div class="max-w-6xl px-4 mx-auto text-center sm:px-6 lg:px-8">
             <h2 class="text-3xl font-bold text-gray-900 md:text-4xl">Why Choose Smart-Ilm-Dalib?</h2>
             <div class="grid grid-cols-1 mt-12 gap-y-16 gap-x-10 md:grid-cols-2 lg:grid-cols-4">
                 <!-- Card 1 -->
@@ -152,8 +164,11 @@ class extends Component {
                 <!-- Card 4 -->
                 <div class="p-6 transition duration-300 ease-in-out bg-white border rounded-lg shadow-md hover:bg-green-500 hover:text-white">
                     <div class="flex justify-center mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6l-2 6h4l-2 6" />
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" color="#000000" fill="none">
+                            <path d="M18.7185 10.7151C18.5258 10.8979 18.2682 11 18.0001 11C17.732 11 17.4744 10.8979 17.2817 10.7151C15.5167 9.03169 13.1515 7.15111 14.305 4.42085C14.9286 2.94462 16.4257 2 18.0001 2C19.5745 2 21.0715 2.94462 21.6952 4.42085C22.8472 7.14767 20.4878 9.03749 18.7185 10.7151Z" stroke="currentColor" stroke-width="1.5" />
+                            <path d="M18 6H18.009" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <circle cx="5" cy="19" r="3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M11 7H9.5C7.567 7 6 8.34315 6 10C6 11.6569 7.567 13 9.5 13H12.5C14.433 13 16 14.3431 16 16C16 17.6569 14.433 19 12.5 19H11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </div>
                     <h3 class="text-lg font-bold">Track Progress</h3>
@@ -164,7 +179,6 @@ class extends Component {
             </div>
         </div>
     </section>
-
 
 
 
