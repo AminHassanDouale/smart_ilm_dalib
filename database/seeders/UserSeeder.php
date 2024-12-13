@@ -5,8 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-
+use Faker\Factory as Faker;
 
 class UserSeeder extends Seeder
 {
@@ -15,25 +14,31 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        $faker = Faker::create();
+
+        // Create the specified first user as a teacher
         User::create([
-            'name' => 'Amin',
+            'name' => 'Aminodiin',
+            'email' => 'aminodiin1995@gmail.com',
             'number' => '77049495',
-            'email' => 'amin.hassan@d-money.dj',
-            'email_verified_at' => now(),
             'password' => Hash::make('password'),
-            'remember_token' => Str::random(10),
-            'department_id' => '1',
-            'avatar' => 'https://picsum.photos/200?x=' . rand(),
-        ]);
-        User::create([
-            'name' => 'Abdillahi',
-            'number' => '77825892',
-            'email' => 'abdillahi.omar@iad.dj',
+            'role' => 'teacher',
             'email_verified_at' => now(),
-            'password' => Hash::make('password'),
-            'remember_token' => Str::random(10),
-            'department_id' => '1',
-            'avatar' => 'https://picsum.photos/200?x=' . rand(),
         ]);
+
+        // Create 50 teachers and 49 parents
+        for ($i = 0; $i < 99; $i++) {
+            User::create([
+                'name' => $faker->name,
+                'email' => $faker->unique()->safeEmail,
+                'number' => $faker->numerify('77######'),
+                'password' => Hash::make('password'),
+                'role' => $i < 50 ? 'teacher' : 'parent',
+                'email_verified_at' => now(),
+            ]);
+        }
+
+        // Log the completion
+
     }
 }
